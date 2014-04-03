@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="names">
+        <item>NestedViewPager</item>
+        <item>CustomNestedViewPager</item>
+        <item>ViewPagerNestingViewPager</item>
+    </string-array>
+    
+
+</resources>
