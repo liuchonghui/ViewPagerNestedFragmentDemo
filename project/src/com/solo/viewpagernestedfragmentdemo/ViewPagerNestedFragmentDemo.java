@@ -14,6 +14,10 @@ import com.jeremyfeinstein.slidingmenu.lib.app.SlidingActivityHelper;
 import com.solo.viewpagernestedfragmentdemo.fragment.SideMenuFragment;
 import com.solo.viewpagernestedfragmentdemo.fragment.ViewPagerFragment;
 
+/**
+ * @author liu_chonghui
+ * 
+ */
 public class ViewPagerNestedFragmentDemo extends FragmentActivity {
 	private SlidingActivityHelper mHelper;
 	protected ListFragment mFrag;
@@ -35,8 +39,7 @@ public class ViewPagerNestedFragmentDemo extends FragmentActivity {
 
 		setContentView(R.layout.content_frame);
 		getSupportFragmentManager().beginTransaction()
-				.replace(R.id.content_frame, new ViewPagerFragment())
-				.commit();
+				.replace(R.id.content_frame, new ViewPagerFragment()).commit();
 
 		setBehindContentView(R.layout.menu_frame);
 		getSupportFragmentManager().beginTransaction()
