@@ -15,10 +15,11 @@ import android.view.ViewGroup;
 import com.solo.viewpagernestedfragmentdemo.R;
 import com.solo.viewpagernestedfragmentdemo.fragment.Usr1Fragment;
 import com.solo.viewpagernestedfragmentdemo.fragment.Usr3Fragment;
+import com.solo.viewpagernestedfragmentdemo.fragment.Usr4Fragment;
 
 public class NestedViewPagerFragment extends Fragment {
 	private static final String[] CONTENT = new String[] { "User1", "User2",
-			"User3" };
+			"User3", "User4", };
 	CustomViewPager pager;
 	TabPageIndicator indicator;
 	PagerAdapter mAdapter;
@@ -26,27 +27,25 @@ public class NestedViewPagerFragment extends Fragment {
 	@Override
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
+		if (pager == null) {
+			pager = (CustomViewPager) getView().findViewById(R.id.nested_pager);
+			pager.setTouchEnabled(false);
+			pager.setOffscreenPageLimit(2);
+			pager.setAdapter(new NestedStatePagerAdapter(getFragmentManager()));
+		}
+
+		if (indicator == null) {
+			indicator = (TabPageIndicator) getView().findViewById(
+					R.id.nested_indicator);
+			indicator.setSmoothScroll(false);
+			indicator.setViewPager(pager);
+		}
 	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		View view = inflater.inflate(R.layout.nested_simple_tabs, null);
-
-		if (pager == null) {
-			pager = (CustomViewPager) view.findViewById(R.id.nested_pager);
-			pager.setTouchEnabled(false);
-
-			pager.setAdapter(new NestedStatePagerAdapter(getFragmentManager()));
-		}
-
-		if (indicator == null) {
-			indicator = (TabPageIndicator) view
-					.findViewById(R.id.nested_indicator);
-			indicator.setSmoothScroll(false);
-			indicator.setViewPager(pager);
-		}
-		return view;
+		return inflater.inflate(R.layout.nested_simple_tabs, null);
 	}
 
 	public class NestedStatePagerAdapter extends FragmentStatePagerAdapter {
@@ -66,7 +65,9 @@ public class NestedViewPagerFragment extends Fragment {
 			ArrayList<Fragment> container = new ArrayList<Fragment>();
 			container.add(new Usr1Fragment());
 			container.add(new NestedNestedViewPagerFragment());
+			// container.add(new Usr2Fragment());
 			container.add(new Usr3Fragment());
+			container.add(new Usr4Fragment());
 			setFragments(container);
 		}
 

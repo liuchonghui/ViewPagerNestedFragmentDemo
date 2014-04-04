@@ -18,7 +18,7 @@ import com.solo.viewpagernestedfragmentdemo.widget.TabPageIndicator;
 
 public class ViewPagerNestingViewPagerFragment extends Fragment {
 	private static final String[] CONTENT = new String[] { "User1", "User2",
-			"User3" };
+			"User3", "User4", };
 	CustomViewPager pager;
 	TabPageIndicator indicator;
 	PagerAdapter mAdapter;
@@ -27,14 +27,15 @@ public class ViewPagerNestingViewPagerFragment extends Fragment {
 	public void onActivityCreated(Bundle savedInstanceState) {
 		super.onActivityCreated(savedInstanceState);
 		if (pager == null) {
-			pager = (CustomViewPager) getView().findViewById(R.id.simple_pager);
+			pager = (CustomViewPager) getView().findViewById(R.id.nest_pager);
 			pager.setTouchEnabled(false);
+			pager.setOffscreenPageLimit(2);
 			pager.setAdapter(new UserStatePagerAdapter(getFragmentManager()));
 		}
 
 		if (indicator == null) {
 			indicator = (TabPageIndicator) getView().findViewById(
-					R.id.simple_indicator);
+					R.id.nest_indicator);
 			indicator.setSmoothScroll(false);
 			indicator.setViewPager(pager);
 		}
@@ -43,7 +44,7 @@ public class ViewPagerNestingViewPagerFragment extends Fragment {
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
 			Bundle savedInstanceState) {
-		return inflater.inflate(R.layout.simple_tabs, null);
+		return inflater.inflate(R.layout.nested_tabs, null);
 	}
 
 	public class UserStatePagerAdapter extends FragmentStatePagerAdapter {
@@ -63,7 +64,9 @@ public class ViewPagerNestingViewPagerFragment extends Fragment {
 			ArrayList<Fragment> container = new ArrayList<Fragment>();
 			container.add(new Usr1Fragment());
 			container.add(new NestedViewPagerFragment());
+			// container.add(new Usr2Fragment());
 			container.add(new Usr3Fragment());
+			container.add(new Usr4Fragment());
 			setFragments(container);
 		}
 
