@@ -31,7 +31,8 @@ public class NestedViewPagerFragment extends Fragment {
 			pager = (CustomViewPager) getView().findViewById(R.id.nested_pager);
 			pager.setTouchEnabled(false);
 			pager.setOffscreenPageLimit(2);
-			pager.setAdapter(new NestedStatePagerAdapter(getFragmentManager()));
+			pager.setAdapter(new NestedStatePagerAdapter(
+					getChildFragmentManager()));
 		}
 
 		if (indicator == null) {
